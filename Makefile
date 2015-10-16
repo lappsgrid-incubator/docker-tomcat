@@ -1,7 +1,7 @@
 DOCKER=/usr/local/bin/docker
 
 tomcat:
-	$(DOCKER) build -f Dockerfile.tomcat -t lappsgrid/tomcat7 .
+	$(DOCKER) build -t lappsgrid/tomcat7 .
 	
 push:
 	$(DOCKER) push lappsgrid/tomcat7
