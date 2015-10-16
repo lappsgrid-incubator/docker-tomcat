@@ -11,7 +11,7 @@ if [ ! -d $DIR ] ; then
    echo "Specified path does not exist or is not a directory."
 fi
 
-for f in $(find $DIR -type f) ; do
-    KEY=$(basename $f)
+for f in $(find $DIR -name "*.xml") ; do
+    KEY=$(basename $f | sed 's/\.xml$//')
     echo "$KEY $f"
 done
