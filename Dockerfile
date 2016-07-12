@@ -1,4 +1,4 @@
-FROM lappsgrid/ubuntu
+FROM lappsgrid/ubuntu:1.0.0
 
 USER root
 
