@@ -1,15 +1,24 @@
-FROM lappsgrid/ubuntu:1.0.0
+FROM lappsgrid/ubuntu:16.04
 
 USER root
 
 ENV TERM=xterm
 
 RUN apt-get update && apt-get install -y tomcat7 tomcat7-admin tomcat7-user tomcat7-common tomcat7-docs
-ADD ./tomcat-users.xml /etc/tomcat7/tomcat-users.xml
-ADD ./setenv.sh /usr/share/tomcat7/bin/setenv.sh
-RUN chown root:tomcat7 /etc/tomcat7/tomcat-users.xml
+COPY ./tomcat-users.xml /etc/tomcat7/tomcat-users.xml
+COPY ./setenv.sh /usr/share/tomcat7/bin/setenv.sh
+COPY ./startup.sh /usr/bin/startup
+COPY ./shutdown.sh /usr/bin/shutdown
+COPY ./tail-log.sh /usr/bin/taillog
+COPY ./waitforlog.sh /usr/bin/waitforlog
+COPY ./waitforstart.sh /usr/bin/waitforstart
 
-ADD ./startup.sh /usr/bin/startup
+#RUN chmod ug+x /usr/bin/waitforstart 
+#RUN chmod ug+x /usr/bin/taillog && \
+#	chmod ug+x /usr/bin/shutdown && \
+#	chmod ug+x /usr/bin/waitforlog 
+RUN cd /usr/bin && chmod ug+x startup shutdown waitforstart waitforlog taillog
+	
 CMD ["/usr/bin/startup"]
 
 
