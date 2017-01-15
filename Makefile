@@ -10,7 +10,7 @@ push:
 
 tag:
 	docker tag $(IMAGE) $(IMAGE):$(VERSION)
-	dockder push $(IMAGE):$(VERSION)
+	docker push $(IMAGE):$(VERSION)
 
 help:
 	@echo "GOALS"
