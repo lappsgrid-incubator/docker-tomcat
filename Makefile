@@ -1,23 +1,23 @@
-DOCKER=/usr/local/bin/docker
+DOCKER=docker
 IMAGE=lappsgrid/tomcat7
-VERSION=1.0.0
+VERSION=1.2.0
 
 tomcat:
-	$(DOCKER) build -t $(IMAGE):$(VERSION) .
+	$(DOCKER) build -t $(IMAGE) .
 	
 push:
-	$(DOCKER) push $(IMAGE):$(VERSION)
+	$(DOCKER) push $(IMAGE):latest
 
 tag:
-	if [ -n "$(TAG)" ] ; then $(DOCKER) tag $(IMAGE):$(VERSION) $(IMAGE):$(TAG) ; fi
+	docker tag $(IMAGE) $(IMAGE):$(VERSION)
+	dockder push $(IMAGE):$(VERSION)
 
 help:
 	@echo "GOALS"
 	@echo
-	@echo "tomcat - A bare Tomcat 7 server."
-	@echo "push   - Pushes the $(IMAGE):$(VERSION) to the Docker hub."
-	@echo "tag    - Tags $(IMAGE):$(VERSION) on the the Docker hub. The"
-	@echo "         tag name must be specified as a parameter."
-	@echo "         I.E.> make tag TAG=foobar"
+	@echo "tomcat  - A bare Tomcat 7 server. (Default goal)"
+	@echo "push    - Pushes the $(IMAGE):latest image to the Docker hub."
+	@echo "tag     - Tags the $(IMAGE):$(VERSION) image and pushes it to the Docker hub."
+	@echo "help    - Prints this message."
 	@echo
 
