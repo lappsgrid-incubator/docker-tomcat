@@ -1,6 +1,6 @@
 DOCKER=docker
 IMAGE=lappsgrid/tomcat7
-VERSION=1.2.1
+VERSION=1.2.2
 
 tomcat:
 	$(DOCKER) build -t $(IMAGE) .

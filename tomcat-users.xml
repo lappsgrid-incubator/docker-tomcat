@@ -23,5 +23,5 @@
   <user username="both" password="tomcat" roles="tomcat,role1"/>
   <user username="role1" password="tomcat" roles="role1"/>
 -->
-  <user username='ksuderman' password='^E,h}ibLeyO_g}f(zK_[W{rG' roles='manager-gui,admin-gui,manager-status' />
+  <user username='admin' password='admin' roles='manager-gui,admin-gui,manager-status' />
 </tomcat-users>
