@@ -1,10 +1,12 @@
 DOCKER=docker
 IMAGE=lappsgrid/tomcat7
-VERSION=1.2.2
+VERSION=1.2.3
 
 tomcat:
-	$(DOCKER) build -t $(IMAGE) .
-	
+	cat tomcat-users.xml.template | sed "s/__PASSWORD__/$(shell curl http://api.lappsgrid.org/password)/" > tomcat-users.xml
+	$(DOCKER) build -t $(IMAGE):$(VERSION) .
+	rm tomcat-users.xml
+
 push:
 	$(DOCKER) push $(IMAGE):latest
 
