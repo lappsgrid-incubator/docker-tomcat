@@ -1,10 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-LOG=/var/log/tomcat7/catalina.out
-service tomcat7 start
+TOMCAT=/usr/local/tomcat
+CONF=$TOMCAT/conf
+BIN=$TOMCAT/bin
 
-until [ -e $LOG ] ; do
-	sleep 2
-done
+pw=`cat /dev/urandom | tr -dc _A-Z-a-z-0-9 | head -c${1:-16};echo;`
+cat $CONF/tomcat-users-template.xml | sed "s/__PASSWORD__/$pw/" > $CONF/tomcat-users.xml
 
-tail -f $LOG
+cd $BIN
+catalina.sh run
